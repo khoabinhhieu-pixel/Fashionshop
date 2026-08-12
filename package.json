@@ -15,7 +15,8 @@
     "db:studio": "prisma studio",
     "db:start": "powershell -NoProfile -Command \"& '.pgsql/bin/pg_ctl.exe' -D '.pgsql/data' -l '.pgsql/logfile.txt' start\"",
     "db:stop": "powershell -NoProfile -Command \"& '.pgsql/bin/pg_ctl.exe' -D '.pgsql/data' stop\"",
-    "db:cleanup-qa": "tsx scripts/cleanup-qa-data.ts"
+    "db:cleanup-qa": "tsx scripts/cleanup-qa-data.ts",
+    "check:images": "tsx scripts/check-image-urls.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.29",
