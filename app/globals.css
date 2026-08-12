@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #ffffff;
+  --color-bg-elevated: #f4f3f1;
+  --color-fg: #141414;
+  --color-fg-muted: #6b6b66;
+  --color-border: rgba(20, 20, 20, 0.1);
+  --color-border-strong: rgba(20, 20, 20, 0.22);
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-bg-elevated: var(--color-bg-elevated);
+  --color-fg: var(--color-fg);
+  --color-fg-muted: var(--color-fg-muted);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --font-sans: var(--font-inter);
+  --container-page: 1600px;
+}
+
+html {
+  background: var(--color-bg);
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-fg);
+  color: var(--color-bg);
+}
+
+.tracked-label {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
