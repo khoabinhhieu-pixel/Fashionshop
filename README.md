@@ -8,7 +8,7 @@ Website thương mại điện tử bán quần áo, xây dựng bằng Next.js 
 - **Đối tượng dùng:**
   - **Khách mua hàng**: duyệt catalog, xem chi tiết sản phẩm, thêm giỏ hàng, đăng ký/đăng nhập, đặt hàng, nạp và thanh toán bằng ví nội bộ, đánh giá sản phẩm.
   - **Quản trị viên** (`role: ADMIN`): quản lý sản phẩm (CRUD + ảnh) và quản lý tài khoản người dùng (cấp quyền, sửa, xoá).
-- **Phạm vi:** phần giao diện + toàn bộ backend (database, xác thực, đơn hàng, ví, đánh giá) đều đã triển khai thật, không phải mock. Riêng cổng thanh toán bên ngoài (ngân hàng/thẻ) chỉ hiển thị form thu thập thông tin tĩnh, không gửi đi đâu — đúng tinh thần một đồ án học thuật.
+- **Phạm vi:** phần giao diện + toàn bộ backend (database, xác thực, đơn hàng, ví, đánh giá) đều đã triển khai. Riêng cổng thanh toán bên ngoài (ngân hàng/thẻ) chỉ hiển thị form thu thập thông tin tĩnh, không gửi đi đâu.
 
 ## Tính năng chính
 
@@ -19,7 +19,7 @@ Website thương mại điện tử bán quần áo, xây dựng bằng Next.js 
 | Tài khoản | Đăng ký/đăng nhập thật (Auth.js), xem hồ sơ, lịch sử ví |
 | Ví (Wallet) | Nạp tiền mô phỏng, thanh toán đơn hàng bằng số dư ví, lịch sử giao dịch |
 | Đánh giá & Feedback | Đánh giá theo sao + bình luận trên từng sản phẩm, testimonials chung ở trang chủ |
-| **Quản trị — Sản phẩm** | CRUD sản phẩm tại `/admin/products`, upload nhiều ảnh/sản phẩm (từ máy hoặc dán URL), ảnh dự phòng tự động khi sản phẩm chưa có ảnh thật |
+| **Quản trị — Sản phẩm** | CRUD sản phẩm tại `/admin/products`, upload nhiều ảnh/sản phẩm (từ máy hoặc dán URL), ảnh dự phòng tự động khi sản phẩm chưa có ảnh |
 | **Quản trị — Tài khoản** | `/admin/users`: cấp/gỡ quyền admin, sửa hồ sơ, xoá tài khoản — có chặn tự khoá quyền của chính mình và chặn gỡ quyền admin cuối cùng |
 
 ## Công nghệ sử dụng
@@ -28,13 +28,13 @@ Website thương mại điện tử bán quần áo, xây dựng bằng Next.js 
 |---|---|
 | Framework | Next.js 16 (App Router, Turbopack) + TypeScript + React 19 |
 | Styling | Tailwind CSS v4 |
-| Database & ORM | PostgreSQL (bản portable, không cần quyền admin) + Prisma 7 (driver adapter `@prisma/adapter-pg`) |
+| Database & ORM | PostgreSQL  + Prisma 7  |
 | Xác thực | Auth.js (`next-auth` v5, Credentials provider, session JWT) |
 | Validate | Zod |
 | Mật khẩu | bcryptjs |
 | State giỏ hàng | Zustand + persist (localStorage) |
-| Animation | Framer Motion (scroll-reveal cho mọi section) |
-| Ảnh sản phẩm | Upload qua Vercel Blob (`@vercel/blob`), hoặc dán URL ngoài — có ảnh dự phòng dạng gradient khi sản phẩm chưa có ảnh thật |
+| Animation | Framer Motion |
+| Ảnh sản phẩm | Upload qua Vercel Blob (`@vercel/blob`), hoặc dán URL ngoài — có ảnh dự phòng dạng gradient khi sản phẩm chưa có ảnh |
 
 ## Hướng dẫn cài đặt & chạy
 
@@ -88,14 +88,9 @@ npm run db:stop              # dừng PostgreSQL
 /scripts      Script QA bằng Playwright
 ```
 
-Xem cấu trúc đầy đủ + quy ước code tại [`CLAUDE.md`](CLAUDE.md).
-
 ## Triển khai (Deploy)
 
 Stack đề xuất, chạy được với gói miễn phí: **Vercel** (hosting) + **Neon** (PostgreSQL serverless) + **Vercel Blob** (ảnh sản phẩm).
-
-1. Tạo database miễn phí tại [neon.tech](https://neon.tech), lấy connection string dạng `postgresql://...?sslmode=require`.
-2. Import repo này vào [vercel.com](https://vercel.com) → khai báo biến môi trường: `DATABASE_URL` (từ Neon), `AUTH_SECRET` (chuỗi ngẫu nhiên 32 byte).
 3. Vào tab **Storage** của project trên Vercel → tạo một **Blob store** → copy `BLOB_READ_WRITE_TOKEN` vào biến môi trường của project.
 4. Áp schema lên database Neon: `npx prisma migrate deploy` (không phải `migrate dev`), rồi `npx prisma db seed` để có dữ liệu mẫu.
 5. Deploy — Vercel build và cấp domain dạng `*.vercel.app`.
