@@ -1,14 +1,14 @@
 # Fashion Shop
 
-Website thương mại điện tử bán quần áo, xây dựng bằng Next.js 16 + PostgreSQL. Đây là **đồ án môn học**, không phải sản phẩm thương mại thật — mọi giao dịch (thanh toán, ví) đều mô phỏng trong phạm vi ứng dụng, không kết nối cổng thanh toán bên ngoài.
+Website thương mại điện tử bán quần áo, xây dựng bằng Next.js 16 + PostgreSQL. Đây là **đồ án môn học**, không phải sản phẩm thương mại — mọi giao dịch (thanh toán, ví) đều mô phỏng trong phạm vi ứng dụng, không kết nối cổng thanh toán bên ngoài.
 
 ## Mô tả đồ án
 
-- **Mục tiêu:** xây dựng một website thương mại điện tử hoàn chỉnh, phong cách thiết kế tối giản/editorial (tham khảo các brand thời trang/outdoor cao cấp), có đầy đủ vòng đời một đơn hàng thật: xem sản phẩm → giỏ hàng → đăng nhập → đặt hàng → thanh toán → xem lại lịch sử — cùng một khu quản trị để vận hành cửa hàng.
+- **Mục tiêu:** xây dựng một website thương mại điện tử hoàn chỉnh, phong cách thiết kế tối giản/editorial (tham khảo các brand thời trang/outdoor cao cấp), có đầy đủ vòng đời một đơn hàng: xem sản phẩm → giỏ hàng → đăng nhập → đặt hàng → thanh toán → xem lại lịch sử — cùng một khu quản trị để vận hành cửa hàng.
 - **Đối tượng dùng:**
   - **Khách mua hàng**: duyệt catalog, xem chi tiết sản phẩm, thêm giỏ hàng, đăng ký/đăng nhập, đặt hàng, nạp và thanh toán bằng ví nội bộ, đánh giá sản phẩm.
   - **Quản trị viên** (`role: ADMIN`): quản lý sản phẩm (CRUD + ảnh) và quản lý tài khoản người dùng (cấp quyền, sửa, xoá).
-- **Phạm vi:** phần giao diện + toàn bộ backend (database, xác thực, đơn hàng, ví, đánh giá) đều đã triển khai thật, không phải mock. Riêng cổng thanh toán bên ngoài (ngân hàng/thẻ) chỉ hiển thị form thu thập thông tin tĩnh, không gửi đi đâu — đúng tinh thần một đồ án học thuật.
+- **Phạm vi:** giao diện và toàn bộ phần xử lý phía máy chủ (cơ sở dữ liệu, xác thực, đơn hàng, ví, đánh giá) đều đã được cài đặt hoàn chỉnh. Riêng cổng thanh toán bên ngoài (ngân hàng/thẻ) chỉ hiển thị biểu mẫu thu thập thông tin, không gửi đi đâu.
 
 ## Tính năng chính
 
@@ -16,10 +16,10 @@ Website thương mại điện tử bán quần áo, xây dựng bằng Next.js 
 |---|---|
 | Trang chủ & Catalog | Trang chủ dạng editorial, danh sách sản phẩm có filter theo giới tính, trang chi tiết sản phẩm (ảnh, màu, mô tả, đánh giá) |
 | Giỏ hàng & Thanh toán | Giỏ hàng phía client (Zustand + localStorage), checkout với 5 phương thức: COD / chuyển khoản / thẻ / quét mã QR / **Ví Fashion Shop** |
-| Tài khoản | Đăng ký/đăng nhập thật (Auth.js), xem hồ sơ, lịch sử ví |
+| Tài khoản | Đăng ký, đăng nhập bằng Auth.js, xem hồ sơ và lịch sử ví |
 | Ví (Wallet) | Nạp tiền mô phỏng, thanh toán đơn hàng bằng số dư ví, lịch sử giao dịch |
 | Đánh giá & Feedback | Đánh giá theo sao + bình luận trên từng sản phẩm, testimonials chung ở trang chủ |
-| **Quản trị — Sản phẩm** | CRUD sản phẩm tại `/admin/products`, upload nhiều ảnh/sản phẩm (từ máy hoặc dán URL), ảnh dự phòng tự động khi sản phẩm chưa có ảnh thật |
+| **Quản trị — Sản phẩm** | CRUD sản phẩm tại `/admin/products`, upload nhiều ảnh/sản phẩm (từ máy hoặc dán URL), ảnh dự phòng tự động khi sản phẩm chưa có ảnh |
 | **Quản trị — Tài khoản** | `/admin/users`: cấp/gỡ quyền admin, sửa hồ sơ, xoá tài khoản — có chặn tự khoá quyền của chính mình và chặn gỡ quyền admin cuối cùng |
 
 ## Công nghệ sử dụng
@@ -34,7 +34,7 @@ Website thương mại điện tử bán quần áo, xây dựng bằng Next.js 
 | Mật khẩu | bcryptjs |
 | State giỏ hàng | Zustand + persist (localStorage) |
 | Animation | Framer Motion (scroll-reveal cho mọi section) |
-| Ảnh sản phẩm | Upload qua Vercel Blob (`@vercel/blob`), hoặc dán URL ngoài — có ảnh dự phòng dạng gradient khi sản phẩm chưa có ảnh thật |
+| Ảnh sản phẩm | Upload qua Vercel Blob (`@vercel/blob`), hoặc dán URL ngoài — có ảnh dự phòng dạng gradient khi sản phẩm chưa có ảnh |
 
 ## Hướng dẫn cài đặt & chạy
 
