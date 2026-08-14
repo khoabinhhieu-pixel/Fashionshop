@@ -51,10 +51,7 @@ npm run db:start
 npx prisma migrate dev
 npx prisma generate
 
-# 4. Seed dữ liệu mẫu (16 sản phẩm, testimonials, tài khoản demo/admin)
-npm run db:seed
-
-# 5. Chạy dev server
+# 4. Chạy dev server
 npm run dev
 ```
 
